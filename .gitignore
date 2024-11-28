@@ -215,3 +215,7 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,intellij+all,visualstudiocode,gradle
+
+# 추가적으로
+application-sensitive.yml
+application-sensitive.properties

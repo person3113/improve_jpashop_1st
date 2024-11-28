@@ -11,6 +11,8 @@ public class Member {
   @Column(name = "member_id")
   private Long id;
 
+  @Column(unique = true)
+  private String loginId; // 로그인할 때 쓰는 아이디
   private String name;
 
   @Embedded
