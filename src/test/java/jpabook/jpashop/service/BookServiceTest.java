@@ -131,12 +131,15 @@ class BookServiceTest {
 
     //given
     Book book = new Book();
+    book.setStockQuantity(10);
     bookService.saveBook(book);
 
-    Order order = new Order();
-    OrderLine orderLine = new OrderLine();
-    orderLine.setBook(book);
-    order.addOrderLine(orderLine);
+    Member member = new Member();
+    em.persist(member);
+
+    Delivery delivery = new Delivery();
+    OrderLine orderLine = OrderLine.createOrderLine(book, book.getPrice(), 1);
+    Order order = Order.createOrder(member, delivery, orderLine);
 
     em.persist(order);
 

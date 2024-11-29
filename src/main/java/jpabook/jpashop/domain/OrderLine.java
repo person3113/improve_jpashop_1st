@@ -1,12 +1,15 @@
 package jpabook.jpashop.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "order_line")
+//@Table(name = "order_line")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)  //createOrderLine으로 통일하려고 protected로 접근 제한함
 public class OrderLine {
 
   @Id @GeneratedValue
@@ -23,4 +26,33 @@ public class OrderLine {
 
   private int orderPrice; //주문 가격
   private int count;      //주문 수량
+
+  /**
+   * 생성 메서드
+   */
+  public static OrderLine createOrderLine(Book book, int orderPrice, int count) {
+    OrderLine orderLine = new OrderLine();
+    orderLine.setBook(book);
+    orderLine.setOrderPrice(orderPrice);
+    orderLine.setCount(count);
+
+    book.removeStock(count);
+    return orderLine;
+  }
+
+  /**
+   * 주문 상품 취소
+   * > 취소된 재고만큼 늘리는 게 목적임
+   */
+  public void cancel() {
+    getBook().addStock(count);
+  }
+
+  /**
+   * 총 가격: 주문 수량 * 가격
+   * @return 주문 상품의 총 가격
+   */
+  public int getTotalPrice() {
+    return getOrderPrice() * getCount();
+  }
 }
