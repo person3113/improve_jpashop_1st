@@ -20,6 +20,19 @@ public class BookService {
     bookRepository.save(book);
   }
 
+  /**
+   * 책(아이템) 수정
+   * merge가 아닌 변경 감지 활용
+   */
+  @Transactional
+  public void updateBook(Long bookId, UpdateBookDto bookDto) {
+    Book findBook = bookRepository.findOne(bookId);
+
+    findBook.setName(bookDto.getName());
+    findBook.setPrice(bookDto.getPrice());
+    findBook.setStockQuantity(bookDto.getStockQuantity());
+  }
+
   public List<Book> findBooks() {
     return bookRepository.findAll();
   }
