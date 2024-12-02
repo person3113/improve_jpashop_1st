@@ -1,5 +1,7 @@
 package jpabook.jpashop.service;
 
+import jpabook.jpashop.controller.UpdateMemberForm;
+import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -56,4 +58,18 @@ public class MemberService {
   public void delete(Member member) {
     memberRepository.delete(member);
   }
+
+  /**
+   * 회원 수정
+   */
+  @Transactional
+  public void updateMember(Long memberId, UpdateMemberForm form) {
+
+    Member member = memberRepository.findOne(memberId);
+    Address address = new Address(form.getCity(), form.getStreet(), form.getZipcode());
+
+    member.setLoginId(form.getLoginId());
+    member.setAddress(address);
+  }
+
 }

@@ -16,11 +16,7 @@ public class BookRepository {
   private final EntityManager em;
 
   public void save(Book book) {
-    if (book.getId() == null) {
       em.persist(book);
-    } else {
-      em.merge(book); // 이건 기존 상품 정보를 업데이트하는 개념
-    }
   }
 
   public Book findOne(Long id) {

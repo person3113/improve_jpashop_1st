@@ -43,7 +43,7 @@
                 <td th:text="${order.orderLines[0].orderPrice}"></td>
                 <td th:text="${order.orderLines[0].count}"></td>
                 <td th:text="${order.status}"></td>
-                <td th:text="${order.orderDate}"></td>
+                <td th:text="${#temporals.format(order.orderDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
                 <td>
                     <a th:if="${order.status.name() == 'ORDER'}" href="#" th:href="'javascript:cancel('+${order.id}+')'"
                        class="btn btn-danger">CANCEL</a>
