@@ -25,9 +25,6 @@ public class OrderRepository {
 
   /**
    * 검색 조건에 동적으로 쿼리를 생성해서 주문 엔티티를 조회한다.
-   *
-   * @param orderSearch
-   * @return
    */
   public List<Order> findAll(OrderSearch orderSearch) {
     //language=JPQL
