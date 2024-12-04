@@ -31,9 +31,7 @@ public class OrderService {
     Book book = bookRepository.findOne(bookId);
 
     //배송정보 생성
-    Delivery delivery = new Delivery();
-    delivery.setAddress(member.getAddress());
-    delivery.setStatus(DeliveryStatus.READY);
+    Delivery delivery = Delivery.createDelivery(member.getAddress(), DeliveryStatus.READY);
 
     //주문상품 생성
     OrderLine orderLine = OrderLine.createOrderLine(book, book.getPrice(), count);

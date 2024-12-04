@@ -17,4 +17,17 @@ public class Member {
 
   @Embedded
   private Address address;
+
+  /**
+   * 생성 메서드
+   */
+  public static Member createMember(String loginId, String name, Address address) {
+    Member member = new Member();
+
+    member.setLoginId(loginId);
+    member.setName(name);
+    member.setAddress(address);
+
+    return member;
+  }
 }

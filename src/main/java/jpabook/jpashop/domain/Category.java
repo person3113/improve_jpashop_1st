@@ -11,8 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Category {
-  @Id
-  @GeneratedValue
+  @Id @GeneratedValue
   @Column(name = "category_id")
   private Long id;
 
@@ -25,9 +24,27 @@ public class Category {
   @OneToMany(mappedBy = "parent")
   private List<Category> children = new ArrayList<>();
 
-  //==연관관계 메서드==//
+  /**
+   * 연관관계 메서드
+   */
   public void addChildCategory(Category child) {
     this.children.add(child);
     child.setParent(this);
   }
+
+  /**
+   * 생성 메서드
+   */
+  public static Category createCategory(String name, Category... children) {
+    Category category = new Category();
+
+    category.setName(name);
+    for (Category child : children) {
+      category.addChildCategory(child);
+    }
+
+    return category;
+
+  }
+
 }

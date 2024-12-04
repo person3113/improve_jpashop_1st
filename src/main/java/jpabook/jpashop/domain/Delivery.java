@@ -16,4 +16,16 @@ public class Delivery {
 
   @Enumerated(EnumType.STRING)
   private DeliveryStatus status; //ENUM [READY(준비), COMP(배송)]
+
+  /**
+   * 생성 메서드
+   */
+  public static Delivery createDelivery(Address address, DeliveryStatus status) {
+    Delivery delivery = new Delivery();
+
+    delivery.setAddress(address);
+    delivery.setStatus(status);
+
+    return delivery;
+  }
 }

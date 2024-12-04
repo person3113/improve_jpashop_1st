@@ -32,7 +32,7 @@ public class OrderLine {
    */
   public static OrderLine createOrderLine(Book book, int orderPrice, int count) {
     OrderLine orderLine = new OrderLine();
-    orderLine.setBook(book);
+    orderLine.setBook(book); //단방향이라서 OrderLine에만 여기서 연간관계 넣어주면 되구나
     orderLine.setOrderPrice(orderPrice);
     orderLine.setCount(count);
 

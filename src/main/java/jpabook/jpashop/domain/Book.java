@@ -27,6 +27,34 @@ public class Book {
   private List<BookLine> bookLines = new ArrayList<>();
 
   /**
+   * 연관관계 메서드
+   */
+  public void addBookLine(BookLine bookLine) {
+    bookLines.add(bookLine);
+    bookLine.setBook(this);
+  }
+
+  /**
+   * 생성 메서드
+   */
+  public static Book createBook(String name, int price, int stockQuantity, String author, String isbn,BookLine... bookLines) {
+
+    Book book = new Book();
+
+    book.setName(name);
+    book.setPrice(price);
+    book.setStockQuantity(stockQuantity);
+    book.setAuthor(author);
+    book.setIsbn(isbn);
+
+    for (BookLine bookLine : bookLines) {
+      book.addBookLine(bookLine);
+    }
+
+    return book;
+  }
+
+  /**
    * 재고 증가
    */
   public void addStock(int quantity){
