@@ -86,4 +86,16 @@ public class MemberController {
     return "redirect:/members";
   }
 
+  /**
+   * 회원 삭제
+   */
+  @PostMapping("/members/{memberId}/delete")
+  public String deleteMember(@PathVariable Long memberId){
+
+    Member member = memberService.findOne(memberId);
+    memberService.delete(member);
+
+    return "redirect:/members";
+  }
+
 }

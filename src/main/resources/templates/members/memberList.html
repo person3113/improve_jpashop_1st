@@ -15,6 +15,7 @@
                 <th>주소</th>
                 <th>우편번호</th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -29,6 +30,10 @@
                     <a href="#" th:href="@{/members/{id}/edit (id=${member.id})}" class="btn btn-primary"
                        role="button">수정</a>
                 </td>
+                <td>
+                    <a href="#" th:href="'javascript:remove('+${member.id}+')'"
+                       class="btn btn-danger">삭제</a>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -36,4 +41,13 @@
     <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
 </body>
+<script>
+    function remove(id) {
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/members/" + id + "/delete");
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
 </html>
