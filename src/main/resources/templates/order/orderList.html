@@ -25,7 +25,7 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>회원명</th>
+                <th>아이디</th>
                 <th>대표상품 이름</th>
                 <th>대표상품 주문가격</th>
                 <th>대표상품 주문수량</th>
@@ -37,7 +37,7 @@
             <tbody>
             <tr th:each="order : ${orders}">
                 <td th:text="${order.id}"></td>
-                <td th:text="${order.member.name}"></td>
+                <td th:text="${order.member.loginId}"></td>
                 <td th:text="${order.orderLines[0].book.name}"></td>
                 <td th:text="${order.orderLines[0].orderPrice}"></td>
                 <td th:text="${order.orderLines[0].count}"></td>

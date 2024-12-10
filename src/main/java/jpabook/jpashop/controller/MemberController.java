@@ -59,7 +59,7 @@ public class MemberController {
 
   /**
    * 상품 수정 폼
-   * : 회원명은 수정할 수 없고, 그 외의 것만 바뀌도록
+   * : loginId는 수정할 수 없고, 그 외의 것만 바뀌도록
    */
   @GetMapping("members/{memberId}/edit")
   public String updateMemberForm(@PathVariable("memberId") Long memberId, Model model) {
@@ -67,7 +67,7 @@ public class MemberController {
     Member member = memberService.findOne(memberId);
 
     UpdateMemberForm form = new UpdateMemberForm();
-    form.setLoginId(member.getLoginId());
+    form.setName(member.getName());
     form.setCity(member.getAddress().getCity());
     form.setStreet(member.getAddress().getStreet());
     form.setZipcode(member.getAddress().getZipcode());
@@ -82,7 +82,7 @@ public class MemberController {
   @PostMapping("members/{memberId}/edit")
   public String updateMember(@PathVariable Long memberId, @ModelAttribute("form") UpdateMemberForm form) {
 
-    memberService.updateMember(memberId, form);
+    memberService.update(memberId, form);
     return "redirect:/members";
   }
 

@@ -5,7 +5,6 @@ import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,13 +62,23 @@ public class MemberService {
    * 회원 수정
    */
   @Transactional
-  public void updateMember(Long memberId, UpdateMemberForm form) {
+  public void update(Long memberId, UpdateMemberForm form) {
 
     Member member = memberRepository.findOne(memberId);
     Address address = new Address(form.getCity(), form.getStreet(), form.getZipcode());
 
-    member.setLoginId(form.getLoginId());
+    member.setName(form.getName());
     member.setAddress(address);
   }
 
+  /**
+   * 회원 수정 - MemberApiController에서 씀. spring jpa 활용 2편 내용
+   * 이름만 수정할 때 씀
+   */
+  @Transactional
+  public void update(Long memberId, String name) {
+
+    Member member = memberRepository.findOne(memberId);
+    member.setName(name);
+  }
 }
