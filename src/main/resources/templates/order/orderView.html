@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link href="../css/bootstrap.min.css"
+        th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+  <style>
+    .container {
+    max-width: 560px;
+            }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+  <div class="py-5 text-center">
+    <h2>주문 상세</h2>
+  </div>
+  <div>
+    <label for="orderId">주문 ID</label>
+    <input type="text" id="orderId" name="orderId" class="form-control" value="1" th:value="${order.id}" readonly>
+  </div>
+  <div>
+    <label for="userName">주문자 이름</label>
+    <input type="text" id="userName" name="userName" class="form-control" value="이름1" th:value="${order.member.name}" readonly>
+  </div>
+  <div>
+    <label for="address">주소</label>
+    <input type="text" id="address" name="address" class="form-control" value="주소1" th:value="${order.member.address}" readonly>
+  </div>
+  <div>
+    <label for="deliveryStatus">배달 상태</label>
+    <input type="text" id="deliveryStatus" name="deliveryStatus" class="form-control" value="배달 상태1" th:value="${order.delivery.status}" readonly>
+  </div>
+  <div>
+    <label for="orderDate">주문 시간</label>
+    <input type="text" id="orderDate" name="orderDate" class="form-control" value="배달 상태1" th:value="${#temporals.format(order.orderDate, 'yyyy.MM.dd HH:mm:ss')}" readonly>
+  </div>
+  <div>
+    <label for="OrderStatus">주문 상태</label>
+    <input type="text" id="OrderStatus" name="OrderStatus" class="form-control" value="배달 상태1" th:value="${order.status}" readonly>
+  </div>
+  <hr class="my-4">
+  <div>
+    <h3>주문 상품</h3>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>상품명</th>
+        <th>주문 가격</th>
+        <th>주문 수량</th>
+      </tr>
+      </thead>
+      <tbody th:each="orderLine : ${order.orderLines}">
+      <tr>
+        <td th:text="${orderLine.book.name}"></td>
+        <td th:text="${orderLine.orderPrice}"></td>
+        <td th:text="${orderLine.count}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="col">
+        <a th:if="${order.status.name() == 'ORDER'}" href="#" th:href="'javascript:cancel('+${order.id}+')'"
+           class="btn w-100 btn-danger btn-lg">CANCEL</a>
+    </div>
+    <div class="col">
+      <button class="w-100 btn btn-secondary btn-lg" onclick="location.href='orderList.html'"
+              th:onclick="|location.href='@{/orders}'|" type="button">목록으로</button>
+    </div>
+  </div>
+  <br>
+  <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+<script>
+  function cancel(id) {
+      var form = document.createElement("form");
+      form.setAttribute("method", "post");
+      form.setAttribute("action", "/orders/" + id + "/cancel");
+      document.body.appendChild(form);
+      form.submit();
+  }
+</script>
+</html>

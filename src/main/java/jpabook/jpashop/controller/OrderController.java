@@ -56,6 +56,14 @@ public class OrderController {
   public String cancelOrder(@PathVariable("orderId") Long orderId) {
 
     orderService.cancelOrder(orderId);
-    return "redirect:/orders";
+    return "redirect:/order/{orderId}/specific";
+  }
+
+  @GetMapping("/order/{orderId}/specific")
+  public String order_specific(@PathVariable("orderId") Long orderId, Model model) {
+    Order order = orderService.findOne(orderId);
+    model.addAttribute("order", order);
+
+    return "order/orderView";
   }
 }

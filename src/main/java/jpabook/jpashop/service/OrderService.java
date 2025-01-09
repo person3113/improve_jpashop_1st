@@ -64,4 +64,8 @@ public class OrderService {
     return orderRepository.findAllByQuerydsl(orderSearch);
   }
 
+  public Order findOne(Long orderId) {
+    return orderRepository.findOne(orderId);
+  }
+
 }

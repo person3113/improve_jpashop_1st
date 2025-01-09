@@ -29,9 +29,10 @@
                 <th>대표상품 이름</th>
                 <th>대표상품 주문가격</th>
                 <th>대표상품 주문수량</th>
-                <th>상태</th>
-                <th>일시</th>
-                <th></th>
+<!--                <th>상태</th>-->
+<!--                <th>일시</th>-->
+                <th>자세히</th>
+<!--                <th>주문 취소</th>-->
             </tr>
             </thead>
             <tbody>
@@ -41,12 +42,16 @@
                 <td th:text="${order.orderLines[0].book.name}"></td>
                 <td th:text="${order.orderLines[0].orderPrice}"></td>
                 <td th:text="${order.orderLines[0].count}"></td>
-                <td th:text="${order.status}"></td>
-                <td th:text="${#temporals.format(order.orderDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
+<!--                <td th:text="${order.status}"></td>-->
+<!--                <td th:text="${#temporals.format(order.orderDate, 'yyyy.MM.dd HH:mm:ss')}"></td>-->
                 <td>
-                    <a th:if="${order.status.name() == 'ORDER'}" href="#" th:href="'javascript:cancel('+${order.id}+')'"
-                       class="btn btn-danger">CANCEL</a>
+                    <a href="#" th:href="@{/order/{orderId}/specific (orderId=${order.id})}" class="btn btn-primary"
+                       role="button">자세히</a>
                 </td>
+<!--                <td>-->
+<!--                    <a th:if="${order.status.name() == 'ORDER'}" href="#" th:href="'javascript:cancel('+${order.id}+')'"-->
+<!--                       class="btn btn-danger">CANCEL</a>-->
+<!--                </td>-->
             </tr>
             </tbody>
         </table>
@@ -54,13 +59,13 @@
     <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
 </body>
-<script>
-    function cancel(id) {
-        var form = document.createElement("form");
-        form.setAttribute("method", "post");
-        form.setAttribute("action", "/orders/" + id + "/cancel");
-        document.body.appendChild(form);
-        form.submit();
-    }
-</script>
+<!--<script>-->
+<!--    function cancel(id) {-->
+<!--        var form = document.createElement("form");-->
+<!--        form.setAttribute("method", "post");-->
+<!--        form.setAttribute("action", "/orders/" + id + "/cancel");-->
+<!--        document.body.appendChild(form);-->
+<!--        form.submit();-->
+<!--    }-->
+<!--</script>-->
 </html>
