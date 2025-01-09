@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: local, sensitive
   jpa:
     hibernate:
       ddl-auto: create
@@ -13,4 +15,3 @@ logging.level:
   org.hibernate.SQL: debug
 #  org.hibernate.orm.jdbc.bind: trace #스프링 부트 3.x, hibernate6
 
-spring.profiles.active: sensitive
