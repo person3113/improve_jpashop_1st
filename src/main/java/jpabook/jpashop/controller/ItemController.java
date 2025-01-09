@@ -83,4 +83,16 @@ public class ItemController {
     bookService.updateBook(bookId, bookDto);
     return "redirect:/items";
   }
+
+  /**
+   * 상품 상세
+   */
+  @GetMapping("/item/{bookId}")
+  public String item(@PathVariable("bookId") Long bookId, Model model) {
+
+    Book book = bookService.findOne(bookId);
+    model.addAttribute("book", book);
+
+    return "items/itemView";
+  }
 }

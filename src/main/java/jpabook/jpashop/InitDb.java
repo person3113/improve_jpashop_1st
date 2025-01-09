@@ -27,13 +27,13 @@ public class InitDb {
     private final EntityManager em;
 
     public void dbInit1() {
-      Member member = createMember("userA", "seoul", "1", "1111");
+      Member member = createMember("loginId1","userA", "seoul", "1", "1111");
       em.persist(member);
 
-      Book book1 = createBook("jpa1", 10000, 100);
+      Book book1 = createBook("jpa1", 10000, 100, "kim", "1234");
       em.persist(book1);
 
-      Book book2 = createBook("jpa2", 20000, 100);
+      Book book2 = createBook("jpa2", 20000, 100, "jeong", "5678");
       em.persist(book2);
 
       OrderLine orderLine1 = OrderLine.createOrderLine(book1, 10000, 1);
@@ -45,13 +45,13 @@ public class InitDb {
     }
 
     public void dbInit2() {
-      Member member = createMember("userB", "busan", "2", "2222");
+      Member member = createMember("loginId2","userB", "busan", "2", "2222");
       em.persist(member);
 
-      Book book1 = createBook("spring1", 20000, 200);
+      Book book1 = createBook("spring1", 20000, 200, "lee", "4321");
       em.persist(book1);
 
-      Book book2 = createBook("spring2", 40000, 300);
+      Book book2 = createBook("spring2", 40000, 300, "park", "8765");
       em.persist(book2);
 
       OrderLine orderLine1 = OrderLine.createOrderLine(book1, 20000, 3);
@@ -62,19 +62,24 @@ public class InitDb {
       em.persist(order);
     }
 
-    private Member createMember(String name, String city, String street, String zipcode) {
+    private Member createMember(String loginId, String name, String city, String street, String zipcode) {
       Member member = new Member();
+      member.setLoginId(loginId);
       member.setName(name);
       member.setAddress(new Address(city, street, zipcode));
       return member;
     }
 
-    private Book createBook(String name, int price, int stockQuantity) {
-      Book book1 = new Book();
-      book1.setName(name);
-      book1.setPrice(price);
-      book1.setStockQuantity(stockQuantity);
-      return book1;
+    private Book createBook(String name, int price, int stockQuantity, String author, String isbn) {
+      Book book = new Book();
+
+      book.setName(name);
+      book.setPrice(price);
+      book.setStockQuantity(stockQuantity);
+      book.setAuthor(author);
+      book.setIsbn(isbn);
+
+      return book;
     }
 
     private Delivery createDelivery(Member member) {
